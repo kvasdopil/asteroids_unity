@@ -9,8 +9,6 @@ public class PlayerController : MonoBehaviour {
 
   public float fwdSpeed = 10;
   public float rotationSpeed = 10;
-  public float xMax = 10;
-  public float zMax = 10;
   public float tilt = 1;
 
   public float fireRate = 0.5f;
