@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour {
   public float zMax = 10;
   public float tilt = 1;
 
+  public float fireRate = 0.5f;
+  private float nextFire = 0.5f;
+
+  public GameObject shot;
+  public Transform shotSpawn;
+
   private void Start() {
     rb = GetComponent<Rigidbody>();
     flare = GameObject.Find("part_jet_flare").GetComponent<ParticleSystem>();
@@ -59,6 +65,13 @@ public class PlayerController : MonoBehaviour {
     } else {
       flare2.Stop();
       flare.Stop();
+    }
+  }
+
+  private void Update() {
+    if (Input.GetButton("Fire1") && Time.time > nextFire) {
+      nextFire = Time.time + fireRate;
+      GameObject clone = Instantiate(shot, shotSpawn.position, shotSpawn.rotation) as GameObject;
     }
   }
 }
