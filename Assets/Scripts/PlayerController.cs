@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
   private Rigidbody rb;
+  private ParticleSystem flare;
+  private ParticleSystem flare2;
 
   public float fwdSpeed = 10;
   public float rotationSpeed = 10;
@@ -13,6 +15,8 @@ public class PlayerController : MonoBehaviour {
 
   private void Start() {
     rb = GetComponent<Rigidbody>();
+    flare = GameObject.Find("part_jet_flare").GetComponent<ParticleSystem>();
+    flare2 = GameObject.Find("part_jet_core").GetComponent<ParticleSystem>();
   }
 
   private void wrap() {
@@ -48,5 +52,13 @@ public class PlayerController : MonoBehaviour {
 
     float rot = rb.rotation.eulerAngles.y;
     rb.rotation = Quaternion.Euler(0.0f, rot + moveHz * rotationSpeed, moveHz * -1 * tilt);
+
+    if (moveVe > 0.1) {
+      flare2.Play();
+      flare.Play();
+    } else {
+      flare2.Stop();
+      flare.Stop();
+    }
   }
 }
