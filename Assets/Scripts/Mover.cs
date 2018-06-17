@@ -6,13 +6,19 @@ public class Mover : MonoBehaviour {
   private Rigidbody rb;
   private Rigidbody owner;
 
-  public float speed = 10;
+  public float speed = 1000;
+  public float ttl = 1.0f;
 
   private void Start() {
     rb = GetComponent<Rigidbody>();
-    owner = GameObject.Find("Player").GetComponent<Rigidbody>();
+    rb.AddForce(rb.rotation * new Vector3(0, 0, 1) * speed);
 
-    rb.velocity = owner.velocity + owner.rotation * new Vector3(0, 0, 1) * speed;
-    // rb.position = owner.position + owner.rotation * new Vector3(0, 0, 1) * 2;
+    ttl = Time.time + ttl;
+  }
+
+  private void FixedUpdate() {
+    if (Time.time > ttl) {
+      Destroy(gameObject);
+    }
   }
 }

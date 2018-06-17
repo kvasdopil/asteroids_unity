@@ -25,36 +25,11 @@ public class PlayerController : MonoBehaviour {
     flare2 = GameObject.Find("part_jet_core").GetComponent<ParticleSystem>();
   }
 
-  private void wrap() {
-    float x = rb.position.x;
-    float z = rb.position.z;
-
-    if (x > xMax) {
-      x -= xMax * 2;
-    }
-
-    if (x < -xMax) {
-      x += xMax * 2;
-    }
-
-    if (z > zMax) {
-      z -= zMax * 2;
-    }
-
-    if (z < -zMax) {
-      z += zMax * 2;
-    }
-
-    rb.position = new Vector3(x, 0, z);
-  }
-
   private void FixedUpdate() {
     float moveHz = Input.GetAxis("Horizontal");
     float moveVe = Input.GetAxis("Vertical");
 
     rb.AddForce(rb.rotation * new Vector3(0, 0, 1) * (moveVe > 0 ? moveVe : 0) * fwdSpeed);
-
-    wrap();
 
     float rot = rb.rotation.eulerAngles.y;
     rb.rotation = Quaternion.Euler(0.0f, rot + moveHz * rotationSpeed, moveHz * -1 * tilt);
@@ -68,10 +43,15 @@ public class PlayerController : MonoBehaviour {
     }
   }
 
+  private void Fire() {
+    GameObject clone = Instantiate(shot, shotSpawn.position, shotSpawn.rotation) as GameObject;
+    clone.GetComponent<Rigidbody>().velocity = rb.velocity;
+  }
+
   private void Update() {
     if (Input.GetButton("Fire1") && Time.time > nextFire) {
+      Fire();
       nextFire = Time.time + fireRate;
-      GameObject clone = Instantiate(shot, shotSpawn.position, shotSpawn.rotation) as GameObject;
     }
   }
 }
