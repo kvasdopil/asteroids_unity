@@ -7,6 +7,6 @@ public class Tumble : MonoBehaviour {
 
   void Start() {
     Rigidbody rb = GetComponent<Rigidbody>();
-    rb.angularVelocity = Random.insideUnitSphere * tumble;
+    rb.angularVelocity = Random.insideUnitSphere * Random.Range(0, tumble);
   }
 }
