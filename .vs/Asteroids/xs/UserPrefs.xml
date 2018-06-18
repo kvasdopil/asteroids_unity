@@ -6,7 +6,7 @@
       <File FileName="Assets/Scripts/Mover.cs" Line="21" Column="27" />
       <File FileName="Assets/Scripts/WrapByBoundary.cs" Line="12" Column="31" />
       <File FileName="Assets/Scripts/Tumble.cs" Line="10" Column="49" />
-      <File FileName="Assets/Scripts/DestroyByContact.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/DestroyByContact.cs" Line="10" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
