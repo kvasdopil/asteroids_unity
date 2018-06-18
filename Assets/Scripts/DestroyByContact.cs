@@ -11,8 +11,9 @@ public class DestroyByContact : MonoBehaviour {
     }
 
     Instantiate(explosion, transform.position, transform.rotation);
+    Rigidbody otherRb = other.GetComponent<Rigidbody>();
     if (other.tag == "Player") {
-      Instantiate(playerExplosion, transform.position, transform.rotation);
+      Instantiate(playerExplosion, otherRb.position, otherRb.rotation);
     }
 
     Destroy(other.gameObject);

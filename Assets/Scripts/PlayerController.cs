@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
   public float fwdSpeed = 10;
   public float rotationSpeed = 10;
   public float tilt = 1;
+  public float recoil = 10;
 
   public float fireRate = 0.5f;
   private float nextFire = 0.5f;
@@ -44,10 +45,12 @@ public class PlayerController : MonoBehaviour {
   private void Fire() {
     GameObject clone = Instantiate(shot, shotSpawn.position, shotSpawn.rotation) as GameObject;
     clone.GetComponent<Rigidbody>().velocity = rb.velocity;
+    rb.AddForce((shotSpawn.position - rb.position).normalized * -1.0f * recoil);
   }
 
   private void Update() {
-    if (Input.GetButton("Fire1") && Time.time > nextFire) {
+    bool pressed = Input.GetKey(KeyCode.Space) || Input.GetButton("Fire1");
+    if (pressed && Time.time > nextFire) {
       Fire();
       nextFire = Time.time + fireRate;
     }
