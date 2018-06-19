@@ -15,12 +15,27 @@ public class GameController : MonoBehaviour {
 	public float minAsteroidSpeed = 3.0f;
 	public float maxAsteroidSpeed = 10.0f;
 
+	private bool gameOver = false; 
+	 
+	//public GUIText gameOverText;
+
 	void Start() {
+		// gameOverText.text = "";
 		StartCoroutine(SpawnAsteroids());
 	}
 
+	void Update() {
+		if (gameOver)
+        {
+            if (Input.GetKeyDown (KeyCode.R))
+            {
+                Application.LoadLevel (Application.loadedLevel); // FIXME: obsolete
+            }
+        }
+	}
+
 	private IEnumerator SpawnAsteroids() {
-		while (true) {
+		while (!gameOver) {
 			yield return new WaitForSeconds(Random.Range(minAsteroidSpawnWait, maxAsteroidSpawnWait));
 			Vector3 spawnPosition = new Vector3 (Random.Range (-1.0f, 1.0f), 0.0f, Random.Range (-1.0f, 1.0f)).normalized * spawnRadius;
 
@@ -33,5 +48,10 @@ public class GameController : MonoBehaviour {
     		tf.localScale = new Vector3(1.0f, 1.0f, 1.0f) * Random.Range(minAsteroidScale, maxAsteroidScale);
     		oid.GetComponent<Rigidbody>().AddForce(spawnPosition * -1.0f * Random.Range(minAsteroidSpeed, maxAsteroidSpeed));
 		}
+	}
+
+	public void GameOver() {
+		//gameOverText.text = "Game over! Press R to restart.";
+		gameOver = true;
 	}
 }

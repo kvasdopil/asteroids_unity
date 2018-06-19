@@ -18,10 +18,14 @@ public class PlayerController : MonoBehaviour {
   public GameObject shot;
   public Transform shotSpawn;
 
+  private GameController gameControllerObject;
+
   private void Start() {
     rb = GetComponent<Rigidbody>();
     flare = GameObject.Find("part_jet_flare").GetComponent<ParticleSystem>();
     flare2 = GameObject.Find("part_jet_core").GetComponent<ParticleSystem>();
+
+    GameObject gameControllerObject = GameObject.FindWithTag("GameController");
   }
 
   private void FixedUpdate() {
