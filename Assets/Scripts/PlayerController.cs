@@ -32,7 +32,9 @@ public class PlayerController : MonoBehaviour {
     float moveHz = Input.GetAxis("Horizontal");
     float moveVe = Input.GetAxis("Vertical");
 
-    rb.AddForce(rb.rotation * new Vector3(0, 0, 1) * (moveVe > 0 ? moveVe : 0) * fwdSpeed);
+    if (moveVe > 0.1) {
+      rb.AddForce(rb.rotation * Vector3.forward * moveVe * fwdSpeed * Time.deltaTime);
+    }
 
     float rot = rb.rotation.eulerAngles.y;
     rb.rotation = Quaternion.Euler(0.0f, rot + moveHz * rotationSpeed, moveHz * -1 * tilt);
@@ -53,7 +55,7 @@ public class PlayerController : MonoBehaviour {
   }
 
   private void Update() {
-    bool pressed = Input.GetKey(KeyCode.Space) || Input.GetButton("Fire1");
+    bool pressed = Input.GetButton("Fire1");
     if (pressed && Time.time > nextFire) {
       Fire();
       nextFire = Time.time + fireRate;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 	public GameObject asteroid;
@@ -17,10 +18,10 @@ public class GameController : MonoBehaviour {
 
 	private bool gameOver = false; 
 	 
-	//public GUIText gameOverText;
+	public Text gameOverText;
 
 	void Start() {
-		// gameOverText.text = "";
+		gameOverText.text = "";
 		StartCoroutine(SpawnAsteroids());
 	}
 
@@ -51,7 +52,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GameOver() {
-		//gameOverText.text = "Game over! Press R to restart.";
+		gameOverText.text = "Game over.\nPress R to restart.";
 		gameOver = true;
 	}
 }
