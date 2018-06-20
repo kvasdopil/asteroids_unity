@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
   public float fireRate = 0.5f;
   private float nextFire = 0.5f;
 
+  public float m_fireTtl = 1.5f;
+
   public GameObject shot;
   public Transform shotSpawn;
 
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour {
     GameObject clone = Instantiate(shot, shotSpawn.position, shotSpawn.rotation) as GameObject;
     clone.GetComponent<Rigidbody>().velocity = rb.velocity;
     rb.AddForce((shotSpawn.position - rb.position).normalized * -1.0f * recoil);
+    Destroy(clone, m_fireTtl);
   }
 
   private void Update() {
