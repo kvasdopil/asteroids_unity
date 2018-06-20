@@ -21,9 +21,11 @@ public class DestroyByContact : MonoBehaviour {
     }
 
     Instantiate(explosion, transform.position, transform.rotation);
+    // FIXME: delete explosion upon end
     Rigidbody otherRb = other.GetComponent<Rigidbody>();
     if (other.tag == "Player") {
       Instantiate(playerExplosion, otherRb.position, otherRb.rotation);
+      // FIXME: delete explosion upon end
       gameController.GameOver();
     }
 

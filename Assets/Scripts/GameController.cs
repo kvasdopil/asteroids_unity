@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
-	public GameObject asteroid;
-	public float spawnRadius = 20.0f;
+    public GameObject[] m_asteroids;
+    public float spawnRadius = 20.0f;
 
 	public float minAsteroidSpawnWait = 1.0f;
 	public float maxAsteroidSpawnWait = 2.0f; 
@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour {
 	 
 	public Text gameOverText;
 
-	void Start() {
+    void Start() {
 		gameOverText.text = "";
 		StartCoroutine(SpawnAsteroids());
 	}
@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour {
 			Debug.Log(spawnPosition);
 
 			Quaternion spawnRotation = Quaternion.identity;
+
+			GameObject asteroid = m_asteroids[Random.Range(0, m_asteroids.Length)];
         	GameObject oid = Instantiate(asteroid, spawnPosition, spawnRotation) as GameObject;
 
 			Transform tf = oid.GetComponent<Transform>();
